@@ -1,0 +1,22 @@
+.navbar {
+    background-color: black;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagelink {
+    color: white;
+    text-decoration: none;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: white;
+    text-decoration: none;
+
+}

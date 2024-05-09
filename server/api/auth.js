@@ -12,12 +12,4 @@ function verifyAccessToken(req, res, next) {
     })
 }
 
-function createAccessToken(username) {
-    const options = { expiresIn: '2h' };
-    return jwt.sign(username, process.env.JWT_SECRET, options);
-}
-
-module.exports = {
-    verifyAccessToken, 
-    createAccessToken
-}
+module.exports = verifyAccessToken;

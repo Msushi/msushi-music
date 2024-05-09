@@ -18,9 +18,8 @@ const reviewSchema = new mongoose.Schema({
         required: true
     },
     image: {
-        type: Buffer,
-        contentType: String,
-        required: false
+        type: String,
+        required: true
     },
     releaseYear: {
         type: Number,

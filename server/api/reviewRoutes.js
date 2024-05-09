@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router()
 const Reviews = require('../db_schema/reviews');
-const { verifyAccessToken, createAccessToken } = require('./auth');
+const verifyAccessToken = require('./auth');
+
+
 
 router.get('/', async (req, res) => {
     try {
@@ -28,7 +30,20 @@ router.get('/recent', async (req, res) => {
 
         res.json(recentReviews);
     } catch (err) {
-        console.error(err);
+        console.log(err.message);
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.get('/featured', async (req, res) => {
+    try {
+        const featuredReviews = await Reviews.find({ visible: true })
+            .sort({ dateReviewed: -1 })
+            .limit(3)
+            .select('id name artist image reviewHeader');
+        res.json(featuredReviews);
+    } catch (err) {
+        console.log(err.message)
         res.status(500).json({ message: err.message });
     }
 });
@@ -51,6 +66,7 @@ router.post('/', verifyAccessToken, async (req, res) => {
         res.status(201).json(dbResponse);
     }
     catch (err) {
+        console.log(err.message);
         res.status(400).json({ message: err.message });
     }
 });
@@ -59,6 +75,15 @@ router.delete('/:id', getReview, async (req, res) => {
     try {
         await res.review.deleteOne();
         res.json({ message: 'Review Deleted' });
+    }
+    catch (err) {
+        res.status(500).json({message: err.message});
+    }
+})
+
+router.get('/:id', getReview, async (req, res) => {
+    try {
+        res.json(res.review);
     }
     catch (err) {
         res.status(500).json({message: err.message});

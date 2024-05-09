@@ -1,0 +1,22 @@
+.featured-review-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    margin: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.featured-review-container img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+.featured-review-container a {
+    text-decoration: none;
+    color: black;
+}
+.preview-text {
+    font-size: 1rem;
+}
